@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>SWiFiIC</title>
+		<meta charset="utf-8">
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="./css/bootstrap.css">
+		<!-- Bootstrap theme -->
+		<link rel="stylesheet" href="./css/bootstrap-theme.min.css">
+		<!-- Minified JavaScript -->
+		<script src="./js/bootstrap.min.js"></script>
+		<!-- jQuery -->
+		<script src="./js/jquery-2.1.0.min.js"></script>
+		<style type="text/css">
+		body {
+			padding-top: 50px;
+		}
+		</style>
+	</head>
+	<body>
+		<header>
+			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+				<div class="container">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="#">SWiFiIC</a>
+					</div>
+					<div class="navbar-collapse collapse">
+						<ul class="nav navbar-nav">
+							<li><a href="./index.html">Home</a></li>
+							<li class="active"><a href="./get_started.html">Get Started</a></li>
+							<li><a href="http://www.github.com/swifiic" target="_blank"><span class="glyphicon glyphicon-new-window"></span> Browse Code</a></li>
+						</ul>
+						<ul class="nav navbar-nav pull-right">
+							<li><a href="./index.html#contact">Contact Us</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+		<div id="main">
+			<div class="container">
+				<div class="row">
+					<h2>Getting Started</h2>
+					<p>This page will guide you through the set up process for development of SWiFiIC Apps</p>
+					<h3>Minimum System Requirements</h3>
+					<ul>
+						<li>Ubuntu 12.04 LTS <span class="text-muted">(Preffered, though you can work on Windows making minor changes to the following instructions)</span></li>
+						<li>JDK 1.7 <span class="text-muted">OpenJDK is fine</span></li>
+						<li>Android SDK - <a href="https://developer.android.com/sdk/index.html" target="_blank"><span class="glyphicon glyphicon-new-window"></span> Get it here.</a></li>
+					</ul>
+					<h3>The Setup</h3>
+					<p class="text-warning">The following instructions assume you are working on Ubuntu 12.04(32-bit), modify them accordingly for your operating system.</p>
+					<br>
+					<p>SWiFiIC applications are based on Java - the "Swilets". For which you would need to install Java SDK. Also, Android application would require this too.</p>
+					<code>$ sudo apt-get install openjdk-7-jdk</code>
+					<br>
+					<br>
+					<p>The following packages are also required:</p>
+					<code>$ sudo apt-get install apache2 php5 mysql-server</code><br>
+					<code>$ sudo apt-get install phpmyadmin</code>
+					<br>
+					<br>
+					<p>Next, you can either download Eclipse from the package manager or download the official Android SDK.<br>
+					To download from the official repositories:</p>
+					<code>$ sudo apt-get install eclipse</code>
+					<br>
+					<br>
+					<p>To set up this up follow the instructions at <a href="https://developer.android.com/sdk/installing/index.html">Android Developers Website</a>, or proceed further if you downloaded the official Android SDK</p>
+					<p>Create a directory where you are going to download the source code and change into it:</p>
+					<code>$ mkdir swifiic-devel &amp;&amp; cd swifiic-devel</code>
+					<br><br>
+					<p>Download the source code:</p>
+					<code>$ git clone https://github.com/swifiic/in-swifiic-andi.git</code><br>
+					<code>$ git clone https://github.com/swifiic/in-swifiic-hub.git</code><br>
+					<code>$ git clone https://github.com/swifiic/msngr-andi.git</code><br>
+					<code>$ git clone https://github.com/swifiic/msngr-hub.git</code><br>
+					<code>$ git clone https://github.com/swifiic/suta-andi.git</code><br>
+					<code>$ git clone https://github.com/swifiic/suta-hub.git</code>
+					<br>
+					<br>
+					<p>Next, you'll need to import all this projects into Eclipse. <span class="text-danger">Eclipse may thow an error for the *-hub projects. To rectify this, please update the source folders for the project by navigating to the project properties > Java Build Path > Source. Remove the listed directory and add the correct one.</span></p>
+					<p>The OTA (Operator Terminal App) is a web portal for adding, editing and deleting the users to the SWiFiIC hub. To set it up you need to have apache running and database configured. After that you need to make sure apache web server is able to serve your OTA app directory. Add this to the apache configuration file (inside the virtual host tag): </p>
+					<code>$ sudo vim /etc/apache2/sites-enabled/000-default.conf</code>
+					<br>
+					<br>
+<pre>
+Alias /ota /path/to/ota-hub-directory
+&lt;Directory /path/to/ota-hub-directory&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;AllowOverride none
+&nbsp;&nbsp;&nbsp;&nbsp;Order allow,deny
+&nbsp;&nbsp;&nbsp;&nbsp;Allow from all
+&lt;/Directory&gt;
+</pre>
+					<br>
+					<p>Restart the web server and see if the above settings work by pointing your browser to <a href="http://localhost/ota" target="_blank">http://localhost/ota</a></p>
+					<p>Finally install IBR-DTN by following the instructions <a href="http://trac.ibr.cs.tu-bs.de/project-cm-2012-ibrdtn/wiki/download#DebianUbuntuRepository" target="_blank">here.</a></p>
+					<p>After installation completion, edit <code>/etc/ibrdtn/ibrdtnd.conf</code> and put something like the following:</p>
+<pre>
+local_uri = dtn://example-url
+logfile = /var/log/ibrdtn/ibrdtn.log
+fragmentation = yes
+stats_traffic = yes
+blob_path = /tmp
+storage_path = /var/spool/ibrdtn/bundles
+discovery_address = ff02::142 224.0.0.142
+discovery_announce = 1
+discovery_crosslayer = yes
+net_interfaces = wlan0
+net_rebind = yes
+net_autoconnect = 3600
+net_internet = eth0
+tcp_idle_timeout = 0
+p2p_ctrlpath = /var/run/wpa_supplicant/wlan0
+routing = epidemic
+routing_forwarding = yes
+net_wlan0_type = tcp # we want to use TCP as protocol
+net_wlan0_interface = wlan0 # listen on interface eth0
+net_wlan0_port = 4556
+</pre>
+					<br>
+					<p class="text-warning">In case of error create a folder /var/spool/ibrdtn/bundles and gave it 777 permissions, 755 didn't work on Ubuntu.</p>
+				</div> <!-- Row -->
+			</div> <!-- Container -->
+		</div> <!-- Main -->
+		<div class="container">
+			<footer>
+				<hr>
+				<p class="text-center">&copy; SWiFiIC</p>
+			</footer>
+		</div>
+	</body>
+</html>
