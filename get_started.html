@@ -44,42 +44,38 @@
 					<p>This page will guide you through the set up process for development of SWiFiIC Apps</p>
 					<h3>Minimum System Requirements</h3>
 					<ul>
-						<li>Ubuntu 12.04 LTS <span class="text-muted">(Preffered, though you can work on Windows making minor changes to the following instructions)</span></li>
+						<li>Ubuntu 14.04 LTS <span class="text-muted">(Preffered, though you can work on Windows for development on android part making minor changes to the following instructions)</span></li>
 						<li>JDK 1.7 <span class="text-muted">OpenJDK is fine</span></li>
 						<li>Android SDK - <a href="https://developer.android.com/sdk/index.html" target="_blank"><span class="glyphicon glyphicon-new-window"></span> Get it here.</a></li>
 					</ul>
 					<h3>The Setup</h3>
-					<p class="text-warning">The following instructions assume you are working on Ubuntu 12.04(32-bit), modify them accordingly for your operating system.</p>
+					<p class="text-warning">The following instructions assume you are working on Ubuntu 14.04(64-bit), modify them accordingly for your operating system.</p>
 					<br>
 					<p>SWiFiIC applications are based on Java - the "Swilets". For which you would need to install Java SDK. Also, Android application would require this too.</p>
 					<code> sudo apt-get install openjdk-7-jdk</code>
-					<br>
 					<br>
 					<p>The following packages are also required:</p>
 					<code> sudo apt-get install apache2 php5 mysql-server phpmyadmin</code>
 					<br>
 					<br>
-					<p>Next, you can either download Eclipse from the package manager or download the official Android SDK.<br>
+					<p>Next, you can either download Eclipse from the package manager or download the official Android SDK. You can work without an IDE if you so wish.<br>
 					To download from the official repositories:</p>
 					<code>$ sudo apt-get install eclipse</code>
 					<br>
 					<br>
 					<p>To set up this up follow the instructions at <a href="https://developer.android.com/sdk/installing/index.html">Android Developers Website</a>, or proceed further if you downloaded the official Android SDK</p>
 					<p>Create a directory where you are going to download the source code and change into it:</p>
-					<code> mkdir swifiic-devel &amp;&amp; cd swifiic-devel</code>
+					<code> mkdir repo &amp;&amp; cd repo</code>
 					<br><br>
 					<p>Download the source code:</p>
-					<code> git clone https://github.com/swifiic/in-swifiic-andi.git</code><br>
-					<code> git clone https://github.com/swifiic/in-swifiic-hub.git</code><br>
-					<code> git clone https://github.com/swifiic/msngr-andi.git</code><br>
-					<code> git clone https://github.com/swifiic/msngr-hub.git</code><br>
-					<code> git clone https://github.com/swifiic/suta-andi.git</code><br>
-					<code> git clone https://github.com/swifiic/suta-hub.git</code><br>
-					<code> git clone https://github.com/swifiic/ota-hub.git</code>
+					<code> git clone https://github.com/swifiic/repo.git</code><br>
 					<br>
 					<br>
-					<p>Next, you'll need to import all this projects into Eclipse. <span class="text-danger">Eclipse may thow an error for the *-hub projects. To rectify this, please update the source folders for the project by navigating to the project properties > Java Build Path > Source. Remove the listed directory and add the correct one.</span></p>
-					<p>The OTA (Operator Terminal App) is a web portal for adding, editing and deleting the users to the SWiFiIC hub. To set it up you need to have apache running and database configured (check out initialization sript in cloned data from git). After that you need to make sure apache web server is able to serve your OTA app directory. Add this to the apache configuration file (inside the virtual host tag): </p>
+					<p>Now you have two options: Command line approach or Eclipse / Android Studio approach</p>
+					<br>
+					<p>Eclipse / Android Studio - approach - Next, you'll need to import all sub-projects into Eclipse. <span class="text-danger">Eclipse may thow an error for the *-hub projects. To rectify this, please update the source folders for the project by navigating to the project properties > Java Build Path > Source. Remove the listed directory and add the correct one.</span></p>
+					<p>Command Line approach - fix the android build dependency using commands like <code>$~/dev-tools/adt1472/sdk/tools/android update project -p andi --target 6</code>. Choose the android location and target based on your setup</p>
+					<p>The OTA (Operator Terminal App) is a web portal for adding, editing and deleting the users to the SWiFiIC hub. To set it up you need to have apache running and database configured (check out initialization sript in cloned data from git). After that you need to make sure apache web server is able to serve your OTA app directory. Add this to the apache configuration file (inside the virtual host tag): [this part is not in repo yet]</p>
 					<code>$ sudo vim /etc/apache2/sites-enabled/000-default.conf</code>
 					<br>
 					<br>
