@@ -73,26 +73,19 @@
 					<br>
 					<p>Now you have two options: Command line approach or Eclipse / Android Studio approach</p>
 					<br>
-					<p>Eclipse / Android Studio - approach - Next, you'll need to import all sub-projects into Eclipse. <span class="text-danger">Eclipse may thow an error for the *-hub projects. To rectify this, please update the source folders for the project by navigating to the project properties > Java Build Path > Source. Remove the listed directory and add the correct one.</span></p>
+					<p>Eclipse / Android Studio - approach - Some projects may be automatically detected, while others will take some effort to create as project or module.
+					Generally there are four projects for android (one library, SOA, SUTA and Msngr) and corresponding projects for Hub.
+					<span class="text-danger">Eclipse may thow an error for the *-hub projects. To rectify this, please update the source folders for the project by navigating to the project properties > Java Build Path > Source. Remove the listed directory and add the correct one.</span></p>
 					<p>Command Line approach - fix the android build dependency using commands like <code>$~/dev-tools/adt1472/sdk/tools/android update project -p andi --target 6</code>. Choose the android location and target based on your setup</p>
-					<p>The OTA (Operator Terminal App) is a web portal for adding, editing and deleting the users to the SWiFiIC hub. To set it up you need to have apache running and database configured (check out initialization sript in cloned data from git). After that you need to make sure apache web server is able to serve your OTA app directory. Add this to the apache configuration file (inside the virtual host tag): [this part is not in repo yet]</p>
-					<code>$ sudo vim /etc/apache2/sites-enabled/000-default.conf</code>
+					[use in root folder ant to build the project]
+					<p>The OTA (Operator Terminal App) is a Tomcat based servlet for, editing and deleting the users to the SWiFiIC hub.
+					Checkout the README.txt in repo for further details</p>
 					<br>
-					<br>
-<pre>
-Alias /ota /path/to/ota-hub-directory
-&lt;Directory /path/to/ota-hub-directory&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;AllowOverride none
-&nbsp;&nbsp;&nbsp;&nbsp;Order allow,deny
-&nbsp;&nbsp;&nbsp;&nbsp;Allow from all
-&lt;/Directory&gt;
-</pre>
-					<br>
-					<p>Restart the web server and see if the above settings work by pointing your browser to <a href="http://localhost/ota" target="_blank">http://localhost/ota</a></p>
+					<p>PHP-MyAdmin can be used to populate the first user [operator] for SOA</p>
 					<p>Finally install IBR-DTN by following the instructions <a href="http://trac.ibr.cs.tu-bs.de/project-cm-2012-ibrdtn/wiki/download#DebianUbuntuRepository" target="_blank">here.</a></p>
 					<p>After installation completion, edit <code>/etc/ibrdtn/ibrdtnd.conf</code> and put something like the following:</p>
 <pre>
-local_uri = dtn://example-url
+local_uri = dtn://example-url.dtn
 logfile = /var/log/ibrdtn/ibrdtn.log
 fragmentation = yes
 stats_traffic = yes
