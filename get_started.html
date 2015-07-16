@@ -76,10 +76,14 @@
 					<p>Eclipse / Android Studio - approach - Some projects may be automatically detected, while others will take some effort to create as project or module.
 					Generally there are four projects for android (one library, SOA, SUTA and Msngr) and corresponding projects for Hub.
 					<span class="text-danger">Eclipse may thow an error for the *-hub projects. To rectify this, please update the source folders for the project by navigating to the project properties > Java Build Path > Source. Remove the listed directory and add the correct one.</span></p>
-					<p>Command Line approach - fix the android build dependency using commands like <code>$~/dev-tools/adt1472/sdk/tools/android update project -p andi --target 6</code>. Choose the android location and target based on your setup</p>
+					<p>Command Line approach - fix the android build dependencies 
+					a. local.properties under each android folder to pick android SDK.
+					   - plat/base/andi/local.properties, plat/app/soa/andi/local.properties, plat/app/suta/andi/local.properties, app/msngr/andi/local.properties	 
+					b. make sure that correct Android API is available in your SDK, else fix it using commands like <code> android update project -p andi --target 6</code>
+					Choose the android location and target based on your setup.</p>
 					<p>[use ant in root folder to build the project]</p>
 					<p>The OTA (Operator Terminal App) is a Tomcat based servlet for, editing and deleting the users to the SWiFiIC hub.
-					Checkout the README.txt in repo for further details</p>
+					Checkout the README.txt in repo for further details on deployment.</p>
 					<br>
 					<p>PHP-MyAdmin can be used to populate the first user [operator] for SOA</p>
 					<p>Finally install IBR-DTN by following the instructions <a href="http://trac.ibr.cs.tu-bs.de/project-cm-2012-ibrdtn/wiki/download#DebianUbuntuRepository" target="_blank">here.</a></p>
