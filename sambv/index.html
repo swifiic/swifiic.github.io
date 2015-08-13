@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+<style>
+#container {
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
+#imagei,
+#videoi {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#videoi {
+  z-index: 10;
+    /* Fallback for web browsers that doesn't support RGBa */
+    background: rgb(99, 99, 99) transparent;
+    /* RGBa with 0.6 opacity */
+    background: rgba(99, 99, 99, 0.6);
+}
+</style>
+
+<div id="container">
+<div id="imagei">
+ <img src="out_July25_750_HDR_bkgrnd.jpg" /> 
+</div>
+<div id="videoi">
+<!--
+<img src="all/out_July25_750_HDR0144.png" />
+-->
+<video autoplay loop>
+  <source src="video_sambv_out.webm">
+</video>
+</div>
+
+</div>
+</body>
+</html>
