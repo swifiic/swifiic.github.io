@@ -52,40 +52,34 @@
 					<p class="text-warning">The following instructions assume you are working on Ubuntu 14.04(64-bit), modify them accordingly for your operating system.</p>
 					<br>
 					<p>SWiFiIC applications are based on Java and tomcat7- the "Swilets". For which you would need to install Java SDK. Also, Android application would require this too.</p>
-					<code> sudo apt-get install openjdk-7-jdk tomcat7</code>
+					<code> sudo apt-get install openjdk-7-jdk tomcat7-user</code>
 					<br>
-					<p>The following packages are also required for debug testing</p>
-					<code> sudo apt-get install apache2 php5 mysql-server phpmyadmin tomcat7</code>
-					<br>
-					<br>
-					<p>Next, you can either download Eclipse from the package manager or download the official Android SDK. You can work without an IDE if you so wish.<br>
-					To download from the official repositories:</p>
-					<code>$ sudo apt-get install eclipse</code>
-					<br>
-					<br>
+					<p>The following packages are also required for debug testing (running / deploying)</p>
+					<code> sudo apt-get install apache2 php5 mysql-server phpmyadmin</code>
+					<br> <br>
+					<p>Next, you download the official Android SDK. You can work without an IDE if you so wish.<br>
+					<br> <br>
 					<p>To set up this up follow the instructions at <a href="https://developer.android.com/sdk/installing/index.html">Android Developers Website</a>, or proceed further if you downloaded the official Android SDK</p>
 					<p>Create a directory where you are going to download the source code and change into it:</p>
 					<code> mkdir repo &amp;&amp; cd repo</code>
-					<br><br>
+					<br> <br>
 					<p>Download the source code:</p>
 					<code> git clone https://github.com/swifiic/repo.git</code><br>
+					<br> <br>
 					<br>
-					<br>
-					<p>Now you have two options: Command line approach or Eclipse / Android Studio approach</p>
-					<br>
-					<p>Eclipse / Android Studio - approach - Some projects may be automatically detected, while others will take some effort to create as project or module.
-					Generally there are four projects for android (one library, SOA, SUTA and Msngr) and corresponding projects for Hub.
-					<span class="text-danger">Eclipse may thow an error for the *-hub projects. To rectify this, please update the source folders for the project by navigating to the project properties > Java Build Path > Source. Remove the listed directory and add the correct one.</span></p>
-					<p>Command Line approach - fix the android build dependencies </p>
-					<p>a. local.properties under each android folder to pick android SDK.</p>
-					<p>   - plat/base/andi/local.properties, plat/app/soa/andi/local.properties, plat/app/suta/andi/local.properties, app/msngr/andi/local.properties</p>
-					<p>b. make sure that correct Android API is available in your SDK, else fix it using commands like <code> android update project -p andi --target 6</code> or project.properties files</p>
+					<p>Fix the android build dependencies </p>
+					<p>a. Edit local.properties under each android folder to pick android SDK. Command will be something like</p>
+					<p>   <code> vi  plat/base/andi/local.properties plat/app/soa/andi/local.properties plat/app/suta/andi/local.properties app/msngr/andi/local.properties </code></p>
+					<p>b. make sure that correct Android API is available in your SDK, else fix it using commands like <code> android update project -p andi --target 6</code> or edit project.properties files manually</p>
 					<p>Choose the android location and target based on your setup.</p>
-					<p>[use ant in root folder to build the project]</p>
+					<br>
+					<p>Use <code>ant </code> in repo folder to build the project</p>
+					<br>
 					<p>The OTA (Operator Terminal App) is a Tomcat based servlet for, editing and deleting the users to the SWiFiIC hub.
 					Checkout the README.txt in repo for further details on deployment.</p>
 					<br>
 					<p>PHP-MyAdmin can be used to populate the first user [operator] for SOA</p>
+					<br>
 					<p>Finally install IBR-DTN by following the instructions <a href="http://trac.ibr.cs.tu-bs.de/project-cm-2012-ibrdtn/wiki/download#DebianUbuntuRepository" target="_blank">here.</a></p>
 					<p>After installation completion, edit <code>/etc/ibrdtn/ibrdtnd.conf</code> and put something like the following:</p>
 <pre>
