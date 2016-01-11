@@ -54,7 +54,7 @@
 					<p class="text-warning">The following instructions assume you are working on Ubuntu 14.04(64-bit), modify them accordingly for your operating system.</p>
 					<br>
 					<p>SWiFiIC applications are based on Java and tomcat7- the "Swilets". For which you would need to install Java SDK. Also, Android application would require this too.</p>
-					<code> sudo apt-get install openjdk-7-jdk tomcat7-user</code>
+					<code> sudo apt-get install openjdk-7-jdk tomcat7 tomcat7-user tomcat7-common </code>
 					<br>
 					<p>The following packages are also required for debug testing (running / deploying)</p>
 					<code> sudo apt-get install apache2 php5 mysql-server phpmyadmin</code>
@@ -81,34 +81,32 @@
 				<div class="row">
 					<h3>The Hub Components</h3>
 					<p>First install IBR-DTN by following the instructions <a href="http://trac.ibr.cs.tu-bs.de/project-cm-2012-ibrdtn/wiki/download#DebianUbuntuRepository" target="_blank">here.</a></p>
-					<p>After installation completion, edit <code>/etc/ibrdtn/ibrdtnd.conf</code> and put something like the following:</p>
+					<p>After installation completion, edit <code>/etc/ibrdtn/ibrdtnd.conf</code> for your environment</p>
+					<p>Following contents will already be there - you can modify if <b>wlan0</b> is not the actual interface on your machine</p>
 					<code>
-					local_uri = dtn://example-url.dtn<br>
-					logfile = /var/log/ibrdtn/ibrdtn.log<br>
-					fragmentation = yes<br>
-					stats_traffic = yes<br>
-					blob_path = /tmp<br>
-					storage_path = /var/spool/ibrdtn/bundles<br>
-					discovery_address = ff02::142 224.0.0.142<br>
-					discovery_announce = 1<br>
-					discovery_crosslayer = yes<br>
-					net_interfaces = wlan0<br>
-					net_rebind = yes<br>
-					net_autoconnect = 3600<br>
-					net_internet = eth0<br>
-					tcp_idle_timeout = 0<br>
-					p2p_ctrlpath = /var/run/wpa_supplicant/wlan0<br>
-					routing = epidemic<br>
-					routing_forwarding = yes<br>
-					net_wlan0_type = tcp # we want to use TCP as protocol<br>
-					net_wlan0_interface = wlan0 # listen on interface eth0<br>
-					net_wlan0_port = 4556<br>
+					local_uri = dtn://example-url.dtn # will be modified to PIN / area code<br>
+					# other values removed ..<br>
+					net_wlan0_interface = wlan0 # listen on interface eth0: Modify the value on RHS if needed<br>
+					# other values removed ..<br>
 					</code>
 					<br>
 					<p class="text-warning">In case of error create a folder /var/spool/ibrdtn/bundles and gave it 777 permissions, 755 didn't work on Ubuntu.</p>					<br>
 					<p>Copy script/deployscript.sh and dist.tar.gz to machine where SWiFiIC is to be deployed. Run <code>sudo bash deployscript.sh</code> from the folder.</p>
 					<p>Once deployment succeeds start the hub components using .../HubSrvr/bin/startup.sh for SOA Servlet;  scripts/runsuta.sh for SUTA Hublet and scripts/runmsngr.sh for Messenger Hublet.</p>
 				</div>
+				<div class="row">
+					<h3>The Execution of HUB Components</h3>
+					<p>use <code>cd /opt/swifiic; sudo scripts/runSoaHub.sh</code>.</p>
+					<p>The SOA (SWiFiIC Operator App) is a Tomcat based servlet. Look at logs under /opt/swifiic/HubSrvr/logs for troubleshooting.</p>
+					<p></p>
+					<p>use <code>cd /opt/swifiic; sudo scripts/runHublets.sh</code>.</p>
+					<p>The SUTA (SWiFiIC User Terminal App) is a Swilet for end user's to access SWiFiIC. </p>
+					<p>Msngr is another hublet to demo the messaging App.</p>
+					<p>The Messenger is a Swilet for end chat using SWiFiIC.</p>
+					<p>To troubleshoot these apps look at logs under <code>/opt/swifiic/log</code>.</p>
+
+
+				</div> <!-- Row -->
 				<div class="row">
 					<h3>The Mobile phone Components</h3>
 					<p>Install and run IBR-DTN service using Google's Play store.</p>
