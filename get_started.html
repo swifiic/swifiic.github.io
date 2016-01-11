@@ -81,7 +81,9 @@
 				<div class="row">
 					<h3>The Hub Components</h3>
 					<p>First install IBR-DTN by following the instructions <a href="http://trac.ibr.cs.tu-bs.de/project-cm-2012-ibrdtn/wiki/download#DebianUbuntuRepository" target="_blank">here.</a></p>
-					<p>After installation completion, edit <code>/etc/ibrdtn/ibrdtnd.conf</code> for your environment</p>
+					<p></p>
+					<p>Copy script/deployscript.sh and dist.tar.gz to machine where SWiFiIC is to be deployed. Run <code>sudo bash deployscript.sh</code> from the folder.</p>
+					<p>After the above script completes, edit <code>/etc/ibrdtn/ibrdtnd.conf</code> for your environment</p>
 					<p>Following contents will already be there - you can modify if <b>wlan0</b> is not the actual interface on your machine</p>
 					<code>
 					local_uri = dtn://example-url.dtn # will be modified to PIN / area code<br>
@@ -90,8 +92,7 @@
 					# other values removed ..<br>
 					</code>
 					<br>
-					<p class="text-warning">In case of error create a folder /var/spool/ibrdtn/bundles and gave it 777 permissions, 755 didn't work on Ubuntu.</p>					<br>
-					<p>Copy script/deployscript.sh and dist.tar.gz to machine where SWiFiIC is to be deployed. Run <code>sudo bash deployscript.sh</code> from the folder.</p>
+					<p class="text-warning">In case of error create a folder /var/spool/ibrdtn/bundles and gave it 777 permissions, 755 didn't work on Ubuntu.</p><br>
 					<p>Once deployment succeeds start the hub components using .../HubSrvr/bin/startup.sh for SOA Servlet;  scripts/runsuta.sh for SUTA Hublet and scripts/runmsngr.sh for Messenger Hublet.</p>
 				</div>
 				<div class="row">
