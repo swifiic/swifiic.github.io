@@ -102,7 +102,6 @@
 					<p>use <code>cd /opt/swifiic; sudo scripts/runHublets.sh</code>.</p>
 					<p>The SUTA (SWiFiIC User Terminal App) is a Swilet for end user's to access SWiFiIC. </p>
 					<p>Msngr is another hublet to demo the messaging App.</p>
-					<p>The Messenger is a Swilet for end chat using SWiFiIC.</p>
 					<p>To troubleshoot these apps look at logs under <code>/opt/swifiic/log</code>.</p>
 
 
@@ -111,8 +110,11 @@
 					<h3>The Mobile phone Components</h3>
 					<p>Install and run IBR-DTN service using Google's Play store.</p>
 					<p>The SOA (SWiFiIC Operator App) is a Tomcat based servlet for, editing and deleting the users to the SWiFiIC hub.and doing other management and monitoring activities.
-					It has an Android based package for the same (SOA-debug.apk). It is only installed on Operator's device.</p>
-					<p>The SUTA (SWiFiIC User Terminal App) is a Swilet for end user's to access SWiFiIC. Setup the hub adress and user address in the Android App for each user.</p>
+					It has an Android based package for the same (SOA-debug.apk). It is <b>only installed on Operator's device.</b></p>
+					<p>In settings update address for Hub to something like "192.168.xx.yy:18090". Use <code>ifconfig</code> on hub to get the ip address.</p>
+					<p>For SOA app default: login is 9876543210 and password is "simple".</p>
+					<p></p>
+					<p>The SUTA (SWiFiIC User Terminal App) is a Swilet for end user's to access SWiFiIC. Setup the hub adress and user name (not alias) in the SUTA App for each user's device.</p>
 					<p>The Messenger is a Swilet for end chat using SWiFiIC.</p>
 
 
