@@ -83,8 +83,10 @@
 					<p>First install IBR-DTN by following the instructions <a href="http://trac.ibr.cs.tu-bs.de/project-cm-2012-ibrdtn/wiki/download#DebianUbuntuRepository" target="_blank">here.</a></p>
 					<p></p>
 					<p>Copy script/deployscript.sh and dist.tar.gz to machine where SWiFiIC is to be deployed. Run <code>sudo bash deployscript.sh</code> from the folder.</p>
-					<p>You can ignore errors on "mkdir: cannot create directory ....: File exists"</p>
-					<p>You should not see any other Errors like access denied in above steps.</p>
+					<ul>
+						<li>You can ignore errors on "mkdir: cannot create directory ....: File exists"</li>
+						<li>You should not see any other Errors like access denied in above steps.</li>
+					</ul>
 					<p></p>
 					<p>After the above script completes, edit <code>/etc/ibrdtn/ibrdtnd.conf</code> for your environment</p>
 					<p>Following contents will already be there - you can modify if <b>wlan0</b> is not the actual interface on your machine</p>
