@@ -40,13 +40,13 @@
 		<div id="main">
 			<div class="container">
 				<div class="row">
-					<h2>Getting Started</h2>
+					<h2>Building SWiFiIC</h2>
 					<p>This page will guide you through the set up process for Development of SWiFiIC Apps</p>
 					<h3>Minimum System Requirements</h3>
 					<ul>
 						<li>Ubuntu 14.04 LTS <span class="text-muted">(Preffered, though you can work on Windows for development on android part making minor changes to the following instructions)</span></li>
 						<li>JDK 1.7 <span class="text-muted">OpenJDK is fine; use <code>sudo update-java-alternatives</code> to set it if default Java in not 1.7</span></li>
-						<li>Android SDK - <a href="https://developer.android.com/sdk/index.html" target="_blank"><span class="glyphicon glyphicon-new-window"></span> Get it here.</a></li>
+						<li>Android SDK Command Line Tools - <a href="https://developer.android.com/studio/index.html#downloads" target="_blank"><span class="glyphicon glyphicon-new-window"></span> Get it here.</a></li>
 					</ul>
 				</div>
 				<div class="row">
@@ -79,6 +79,15 @@
 					<br>
 				</div>
 				<div class="row">
+					<h2>Deploying SWiFiIC</h2>
+					<h3>Minimum System Requirements</h3>
+					<ul>
+						<li>Ubuntu 14.04 LTS <span class="text-muted">(Preffered, though you can work on Windows for development on android part making minor changes to the following instructions)</span></li>
+						<li>Java Run Time (JRE) or JDK -  1.7 <span class="text-muted">OpenJDK is fine; use <code>sudo update-java-alternatives</code> to set it if default Java in not 1.7</span></li>
+						<li>Tomcat7-userand MySQL Server <code>sudo apt-get install tomcat7-user tomcat7-common mysql-server]</code></li>
+						<li>IBR-DTN see below. </li> 
+						<li>Optionally you can have apache2, php and phpmyadmin for debugging.</li>
+					
 					<h3>The Hub Components</h3>
 					<p>First install IBR-DTN by following the instructions <a href="http://trac.ibr.cs.tu-bs.de/project-cm-2012-ibrdtn/wiki/download#DebianUbuntuRepository" target="_blank">here.</a></p>
 					<p></p>
