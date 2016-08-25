@@ -1,0 +1,43 @@
+For a regular Ubuntu installation follwoing are the expected steps for setup.
+
+Ensure that network issues are not there (e.g. Cyberoam Authentication is done).
+
+Note 1: scripts/setup_and_build.sh is missing still
+Note 2: we need to move to tomcat8 shortly 
+
+Developer Setup:
+0. If you get some errors like "file not found" or not executable its tied to 32 bit vs. 64 bit issues
+   $  sudo apt-get install lib32z1 lib32ncurses5 lib32stdc++6 -y
+
+A. Ensure Java Developer Kit, git, ant and Tomcat Development environemnet is present.
+   $  sudo apt-get install tomcat7 tomcat7-user tomcat7-common openjdk-8-jdk git ant -y
+
+B. Download the Android SDK command line tools : e.g. android-sdk_r24.4.1-linux.tgz from https://developer.android.com/studio/index.html#downloads or http://172.16.3.193/BigFiles in BPHC
+   $  mkdir -p ~/tools;cd ~/tools; # uniform environment for all user specific tools 
+   $  wget http://172.16.2.193/BigFiles/android-sdk_r24.4.1-linux.tgz
+   $  tar xfz android-sdk_r24.4.1-linux.tgz
+   $  export PATH=$PATH:~/tools/android-sdk-linux/tools/
+   $  android ; # launch android to download at least Android 5.0 (API 21) - you may also download other components if desired
+
+C. Download and build
+   $ mkdir -p ~/workarea; cd ~/workarea
+   $ git clone https://github.com/swifiic/repo.git
+   $ cd swifiic/repo
+   $ scripts/setup_and_build.sh
+   
+
+Deployment setup:
+A. IBR DTN - pre setup
+for Ubuntu 16.04
+  1.   wget http://download.opensuse.org/repositories/home:/j_morgenroth/xUbuntu_16.04/Release.key
+  2.   sudo apt-key add Release.key
+  3.   echo "deb http://download.opensuse.org/repositories/home:/j_morgenroth/xUbuntu_16.04 ./" | sudo tee -a /etc/apt/sources.list
+ Replace "16.04" by appropriate version if needed
+
+B. Download the runtime packages
+  Make sure to remember the passwords used in setup of mysql-server (and phpmyadmin if used)
+  1.   sudo apt-get update
+  2.   sudo apt-get install ibrdtn ibrdtn-tools tomcat7-user tomcat7-common openjdk-8-jdk mysql-server -y
+  OPT: sudo apt-get install apache2 phpmyadmin mysql-client  
+
+
