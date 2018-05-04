@@ -26,39 +26,39 @@
 					</div>
 					<div class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
-							<li><a href="./index.html">Home</a></li>
-							<li class="active"><a href="./get_started.html">Get Started</a></li>
+							<li ><a href="./index.html">Home</a></li>
+							<li class="active"><a href="#">Get Started</a></li>
 							<li><a href="http://www.github.com/swifiic" target="_blank"><span class="glyphicon glyphicon-new-window"></span> Browse Code</a></li>
+							<li><a href="./publications/index.html">Papers Published</a></li>
+							<li><a href="./sambv/index.html">SAMBV Demo </a></li>
 						</ul>
 						<ul class="nav navbar-nav pull-right">
-							<li><a href="./index.html#contact">Contact Us</a></li>
+							<li><a href="#contact">Contact Us</a></li>
 						</ul>
-					</div>
 				</div>
 			</nav>
 		</header>
 		<div id="main">
 			<div class="container">
 				<div class="row">
-					<h2>Building SWiFiIC</h2>
+					<h2>Building and Deploying SWiFiIC</h2>
+					Note that build system for SWiFiIC needs additional developer tools (like Android SDK etc.) while the deployment system has smaller needs.
+					<h3>Building SWiFiIC</h3>
 					<p>This page will guide you through the set up process for Development of SWiFiIC Apps</p>
 					<h3>Minimum System Requirements</h3>
 					<ul>
-						<li>Ubuntu 14.04 LTS <span class="text-muted">(Preffered, though you can work on Windows for development on android part making minor changes to the following instructions)</span></li>
-						<li>JDK 1.7 <span class="text-muted">OpenJDK is fine; use <code>sudo update-java-alternatives</code> to set it if default Java in not 1.7</span></li>
+						<li>Ubuntu 16.04 LTS <span class="text-muted">(Preffered, though you can work on Windows for development on android part making minor changes to the following instructions)</span></li>
+						<li>Tocmcat-8 and JDK 1.8 <span class="text-muted">OpenJDK is fine; use <code>sudo update-java-alternatives</code> to set it if default Java in not 1.8</span></li>
 						<li>Android SDK Command Line Tools - <a href="https://developer.android.com/studio/index.html#downloads" target="_blank"><span class="glyphicon glyphicon-new-window"></span> Get it here.</a></li>
 					</ul>
 				</div>
 				<div class="row">
 					<h3>The Build Setup</h3>
-					<p class="text-warning">The following instructions assume you are working on Ubuntu 14.04(64-bit), modify them accordingly for your operating system.</p>
+					<p class="text-warning">The following instructions assume you are working on Ubuntu 16.04(64-bit), modify them accordingly for your operating system.</p>
 					<br>
-					<p>SWiFiIC applications are based on Java and tomcat7- the "Swilets". For which you would need to install Java SDK. Also, Android application would require this too.</p>
-					<code> sudo apt-get install openjdk-7-jdk tomcat7 tomcat7-user tomcat7-common </code>
+					<p>SWiFiIC applications are based on Java and tomcat-user- the "Swilets". For which you would need to install Java SDK. Android application would require this too.</p>
+					<code> sudo apt-get install tomcat8 tomcat8-user tomcat8-common </code>
 					<br>
-					<p>The following packages are also required for debug testing (running / deploying)</p>
-					<code> sudo apt-get install apache2 php5 mysql-server phpmyadmin</code>
-					<br> <br>
 					<p>Next, you download the official Android SDK. You can work without an IDE if you so wish.<br>
 					<br> <br>
 					<p>To set up this up follow the instructions at <a href="https://developer.android.com/sdk/installing/index.html">Android Developers Website</a>, or proceed further if you downloaded the official Android SDK</p>
@@ -67,38 +67,40 @@
 					<br> <br>
 					<p>Download the source code:</p>
 					<code> git clone https://github.com/swifiic/repo.git</code><br>
-					<br> <br>
+					<code> cd repo</code><br> 
+					<code> bash build-all.sh build # or bash build-all.sh clean to remove output of old builds</code><br>
 					<br>
-					<p>Fix the android build dependencies; (in future scripts/checkandbuild.sh will cover these steps) </p>
-					<p>a. Edit  <code>swifiic.properties </code> under repo to pick correct android  <code>sdk.dir </code> and  <code>target </code>.</p>
-					<p>b. To find the target use appropriate index from output of <code>android list target</code>. Use any release of 20 or higher.</p>
-					<p>c. Make sure that correct Android API is available in your SDK, else fix it using commands like <code> android update project -p andi --target &lt; index from step b &gt;</code>  outside the  <code>andi folder </code> or edit project.properties files manually in  <code>andi </code> folders</p>
+					<p>Fix the android build dependencies if build fails </p>
+					<p>a. Ensure <code> ANDROID_HOME </code> is setto correct path </p>
+					<p>b. Update the target SDK levels in andorid projects as required.</p>
+					<p>c. To build a specific sub project you can just invoke <code> ./gradlew build </code> for android proejects and <code> ./gradlew all <./code> for hub projects</p>
 					<br>
-					<p>Use <code>ant </code> in repo folder to build the project.</p>
-					<p>After the build completes you should see a status like "BUILD SUCCESSFUL". If errors are there, work on resolving them or contact the authors.</p>
+					<p>After the build completes you should see <code>swifiic.tar.gz</code> in the repo folder. If errors are there, work on resolving them or contact the authors.</p>
 					<br>
 				</div>
 				<div class="row">
-					<h2>Deploying SWiFiIC</h2>
+					<h3>Deploying SWiFiIC</h3>
 					<h3>Minimum System Requirements</h3>
 					<ul>
-						<li>Ubuntu 14.04 LTS <span class="text-muted">(Preffered, though you can work on Windows for development on android part making minor changes to the following instructions)</span></li>
-						<li>Java Run Time (JRE) or JDK -  1.7 <span class="text-muted">OpenJDK is fine; use <code>sudo update-java-alternatives</code> to set it if default Java in not 1.7</span></li>
-						<li>Tomcat7-userand MySQL Server <code>sudo apt-get install tomcat7-user tomcat7-common mysql-server]</code></li>
+						<li>Ubuntu 16.04 LTS </li>
+						<li>Java Run Time (JRE) or JDK -  1.8 <span class="text-muted">OpenJDK is fine; use <code>sudo update-java-alternatives</code> to set it if default Java in not 1.8</span></li>
+						<li>Tomcat8-userand MySQL Server <code>sudo apt-get install tomcat8-user tomcat8-common mysql-server mysql-client</code></li>
 						<li>IBR-DTN see below. </li> 
-						<li>Optionally you can have apache2, php and phpmyadmin for debugging.</li>
-					
-					<h3>The Hub Components</h3>
-					<p>First install IBR-DTN by following the instructions <a href="http://trac.ibr.cs.tu-bs.de/project-cm-2012-ibrdtn/wiki/download#DebianUbuntuRepository" target="_blank">here.</a></p>
+						<li>Optionally you can have apache2, php and phpmyadmin for debugging.
+							<code> sudo apt-get install apache2 php5 mysql-server phpmyadmin</code>
+							</li>
+					<br> <br>
+
+					<p>Install IBR-DTN by following the instructions <a href="http://trac.ibr.cs.tu-bs.de/project-cm-2012-ibrdtn/wiki/download#DebianUbuntuRepository" target="_blank">here.</a></p>
 					<p></p>
-					<p>Copy script/deployscript.sh and dist.tar.gz to machine where SWiFiIC is to be deployed. Run <code>sudo bash deployscript.sh</code> from the folder.</p>
+					<p>extract  script/deployscript.sh swifiic.tar.gz and copy swifiic.tar.gz and deployscript.sh to a temporary folder. Run <code>sudo bash deployscript.sh</code> from the folder.</p>
 					<ul>
-						<li>You can ignore errors on "mkdir: cannot create directory ....: File exists"</li>
+						<li>You can ignore errors on "mkdir: cannot create directory ....: File exists" or user exists </li>
 						<li>You should not see any other Errors like access denied in above steps.</li>
 					</ul>
 					<p></p>
 					<p>After the above script completes, edit <code>/etc/ibrdtn/ibrdtnd.conf</code> for your environment</p>
-					<p>Following contents will already be there - you can modify if <b>wlan0</b> is not the actual interface on your machine</p>
+					<p>Following contents will already be there - you can modify if <b>wlan0</b> is not the actual WiFi interface on your machine</p>
 					<code>
 					local_uri = dtn://example-url.dtn # will be modified to PIN / area code<br>
 					# other values removed ..<br>
