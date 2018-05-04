@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>SWiFiIC</title>
+		<title>SWiFiIC Build and Deploy</title>
 		<meta charset="utf-8">
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="./css/bootstrap.css">
@@ -42,10 +42,10 @@
 			<div class="container">
 				<div class="row">
 					<h2>Building and Deploying SWiFiIC</h2>
-					Note that build system for SWiFiIC needs additional developer tools (like Android SDK etc.) while the deployment system has smaller needs.
+					Note that build system for SWiFiIC needs additional developer tools (like Android SDK etc.) while the deployment system has lesser needs.
 					<h3>Building SWiFiIC</h3>
-					<p>This page will guide you through the set up process for Development of SWiFiIC Apps</p>
-					<h3>Minimum System Requirements</h3>
+					<p>This Sub-section will guide you through the set up process for Development of SWiFiIC Apps</p>
+					<h4>Minimum System Requirements</h4>
 					<ul>
 						<li>Ubuntu 16.04 LTS <span class="text-muted">(Preffered, though you can work on Windows for development on android part making minor changes to the following instructions)</span></li>
 						<li>Tocmcat-8 and JDK 1.8 <span class="text-muted">OpenJDK is fine; use <code>sudo update-java-alternatives</code> to set it if default Java in not 1.8</span></li>
@@ -53,7 +53,7 @@
 					</ul>
 				</div>
 				<div class="row">
-					<h3>The Build Setup</h3>
+					<h4>The Build Setup</h4>
 					<p class="text-warning">The following instructions assume you are working on Ubuntu 16.04(64-bit), modify them accordingly for your operating system.</p>
 					<br>
 					<p>SWiFiIC applications are based on Java and tomcat-user- the "Swilets". For which you would need to install Java SDK. Android application would require this too.</p>
@@ -63,9 +63,9 @@
 					<br> <br>
 					<p>To set up this up follow the instructions at <a href="https://developer.android.com/sdk/installing/index.html">Android Developers Website</a>, or proceed further if you downloaded the official Android SDK</p>
 					<p>Create a directory where you are going to download the source code and change into it:</p>
-					<code> mkdir repo &amp;&amp; cd repo</code>
+					<code> mkdir workarea &amp;&amp; cd workarea</code>
 					<br> <br>
-					<p>Download the source code:</p>
+					<p>Download and build the source code:</p>
 					<code> git clone https://github.com/swifiic/repo.git</code><br>
 					<code> cd repo</code><br> 
 					<code> bash build-all.sh build # or bash build-all.sh clean to remove output of old builds</code><br>
@@ -73,18 +73,18 @@
 					<p>Fix the android build dependencies if build fails </p>
 					<p>a. Ensure <code> ANDROID_HOME </code> is setto correct path </p>
 					<p>b. Update the target SDK levels in andorid projects as required.</p>
-					<p>c. To build a specific sub project you can just invoke <code> ./gradlew build </code> for android proejects and <code> ./gradlew all <./code> for hub projects</p>
+					<p>c. To build a specific sub project you can just invoke <code> ./gradlew build </code> for android proejects and <code> ./gradlew all </code> for hub projects</p>
 					<br>
 					<p>After the build completes you should see <code>swifiic.tar.gz</code> in the repo folder. If errors are there, work on resolving them or contact the authors.</p>
 					<br>
 				</div>
 				<div class="row">
 					<h3>Deploying SWiFiIC</h3>
-					<h3>Minimum System Requirements</h3>
+					<h4>Minimum System Requirements</h4>
 					<ul>
 						<li>Ubuntu 16.04 LTS </li>
 						<li>Java Run Time (JRE) or JDK -  1.8 <span class="text-muted">OpenJDK is fine; use <code>sudo update-java-alternatives</code> to set it if default Java in not 1.8</span></li>
-						<li>Tomcat8-userand MySQL Server <code>sudo apt-get install tomcat8-user tomcat8-common mysql-server mysql-client</code></li>
+						<li>Tomcat8-user and MySQL  <code>sudo apt-get install tomcat8-user tomcat8-common mysql-server mysql-client</code></li>
 						<li>IBR-DTN see below. </li> 
 						<li>Optionally you can have apache2, php and phpmyadmin for debugging.
 							<code> sudo apt-get install apache2 php5 mysql-server phpmyadmin</code>
@@ -93,7 +93,9 @@
 
 					<p>Install IBR-DTN by following the instructions <a href="http://trac.ibr.cs.tu-bs.de/project-cm-2012-ibrdtn/wiki/download#DebianUbuntuRepository" target="_blank">here.</a></p>
 					<p></p>
-					<p>extract  script/deployscript.sh swifiic.tar.gz and copy swifiic.tar.gz and deployscript.sh to a temporary folder. Run <code>sudo bash deployscript.sh</code> from the folder.</p>
+					<p>extract  script/deployscript.sh and dist/scripts/check_deployment.sh from swifiic.tar.gz and copy swifiic.tar.gz + check_deployment.sh + deployscript.sh to a temporary folder.</p>
+					<p>Run <code>sudo bash check_deployment.sh</code> to check that deployment pre-requisites are met.</p>
+					<p>Run <code>sudo bash deployscript.sh</code> to install.</p>
 					<ul>
 						<li>You can ignore errors on "mkdir: cannot create directory ....: File exists" or user exists </li>
 						<li>You should not see any other Errors like access denied in above steps.</li>
